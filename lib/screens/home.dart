@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:searchable_listview/searchable_listview.dart';
 import 'package:user_listings_app/components/user_tile.dart';
+import 'package:user_listings_app/model/user_model.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+  final List<UserModel> users = [
+    UserModel(
+      name: 'Marissa Mayer',
+      id: '1',
+      about: 'In a rush to catch a plane',
+      phoneNumber: '+923358712692',
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -14,25 +23,26 @@ class HomeScreen extends StatelessWidget {
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 8),
         padding: const EdgeInsets.only(top: 8),
-        child: SearchableList<UserTile>(
-          initialList: [const UserTile()],
+        child: SearchableList<UserModel>(
+          initialList: users,
           filter: (query) {
             if (query == 'a') {
               return [];
             }
-            return [UserTile()];
+            return users;
           },
-          emptyWidget: Center(
-              child: const Text(
-            'No User Found.',
-            style: TextStyle(fontSize: 20),
-          )),
+          emptyWidget: const Center(
+            child: Text(
+              'No User Found.',
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
           inputDecoration: const InputDecoration(
             label: Text('Search User'),
             border: OutlineInputBorder(),
           ),
-          itemBuilder: (UserTile item) {
-            return item;
+          itemBuilder: (UserModel userModel) {
+            return UserTile(user: userModel);
           },
         ),
       ),
