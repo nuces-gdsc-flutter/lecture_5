@@ -4,15 +4,7 @@ import 'package:user_listings_app/components/user_tile.dart';
 import 'package:user_listings_app/model/user_model.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
-  final List<UserModel> users = [
-    UserModel(
-      name: 'Marissa Mayer',
-      id: '1',
-      about: 'In a rush to catch a plane',
-      phoneNumber: '+923358712692',
-    ),
-  ];
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +37,10 @@ class HomeScreen extends StatelessWidget {
             border: OutlineInputBorder(),
           ),
           itemBuilder: (UserModel userModel) {
-            return UserTile(user: userModel);
+            return UserTile(
+              user: userModel,
+              key: Key(userModel.id),
+            );
           },
         ),
       ),

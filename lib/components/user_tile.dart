@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:user_listings_app/model/user_model.dart';
+import 'package:user_listings_app/screens/user_details.dart';
 
 class UserTile extends StatelessWidget {
   const UserTile({super.key, required this.user});
@@ -8,8 +9,11 @@ class UserTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: CircleAvatar(
-        foregroundImage: user.image.image,
+      leading: Hero(
+        tag: 'profile picture ${user.id}',
+        child: CircleAvatar(
+          foregroundImage: user.image.image,
+        ),
       ),
       title: Text(
         user.name,
@@ -22,7 +26,13 @@ class UserTile extends StatelessWidget {
         user.about,
         style: const TextStyle(fontSize: 13.5),
       ),
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => UserDetailsScreen(
+            user: user,
+          ),
+        ));
+      },
     );
   }
 }
