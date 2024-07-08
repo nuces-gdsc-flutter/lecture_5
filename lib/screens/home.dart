@@ -26,15 +26,18 @@ class HomeScreen extends StatelessWidget {
         child: SearchableList<UserModel>(
           initialList: users,
           filter: (query) {
-            if (query == 'a') {
-              return [];
-            }
-            return users;
+            return users
+                .where((userModal) => userModal.name
+                    .toLowerCase()
+                    .startsWith(query.toLowerCase()))
+                .toList();
           },
-          emptyWidget: const Center(
+          emptyWidget: const SizedBox(
+            width: double.infinity,
             child: Text(
               'No User Found.',
               style: TextStyle(fontSize: 20),
+              textAlign: TextAlign.center,
             ),
           ),
           inputDecoration: const InputDecoration(
