@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:user_listings_app/screens/home.dart';
+
+import 'screens/home.dart';
 
 void main() {
   runApp(const MyApp());

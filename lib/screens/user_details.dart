@@ -19,9 +19,13 @@ class UserDetailsScreen extends StatelessWidget {
             Center(
               child: Hero(
                 tag: 'profile picture ${user.id}',
-                child: CircleAvatar(
-                  foregroundImage: user.image.image,
-                  radius: 90,
+                child: ClipOval(
+                  child: CircleAvatar(
+                    radius: 90,
+                    child: Image.network(
+                      user.imageUrl,
+                    ),
+                  ),
                 ),
               ),
             ),

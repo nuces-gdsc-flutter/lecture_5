@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:user_listings_app/model/user_model.dart';
-import 'package:user_listings_app/screens/user_details.dart';
+
+import '../model/user_model.dart';
+import '../screens/user_details.dart';
 
 class UserTile extends StatelessWidget {
   const UserTile({super.key, required this.user});
@@ -12,7 +13,11 @@ class UserTile extends StatelessWidget {
       leading: Hero(
         tag: 'profile picture ${user.id}',
         child: CircleAvatar(
-          foregroundImage: user.image.image,
+          child: ClipOval(
+            child: Image.network(
+              user.imageUrl,
+            ),
+          ),
         ),
       ),
       title: Text(
